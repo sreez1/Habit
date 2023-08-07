@@ -1,6 +1,7 @@
 const registerRouter = require('express').Router()
 const User = require("../models/user"); 
 const bcrypt = require('bcrypt');
+const validator = require('validator');
 
 registerRouter.get('/',async(request, response) => {
     try{
@@ -13,6 +14,11 @@ registerRouter.get('/',async(request, response) => {
 
 registerRouter.post('/',async(request,response) => {
         const {username, email, password} = request.body
+        if(validator.isEmail(email)){
+            return response.status(400).json({
+                error:'Invalid Email'
+            })
+        }
         const saltRounds = 10
         const passwordHash = await bcrypt.hash(password, saltRounds)
         const register = new User({ username, email, passwordHash,})

@@ -22,6 +22,12 @@ const habitSchema = new mongoose.Schema({
     ],
 })
 
+habitSchema.set('toJSON',{
+    transform:(document,returnedObject)=>{
+      delete returnedObject.__v
+    }
+  })
+
 const Habit = mongoose.model("Habit", habitSchema);
 
 module.exports = Habit;
