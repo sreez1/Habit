@@ -5,11 +5,11 @@ const loginRouter = express.Router();
 const bcrypt = require('bcrypt');
 
 loginRouter.post('/', async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
   try {
     // Verify the provided username and password
-    const user = await User.findOne({ username });
+    const user = await User.findOne({ email });
 
     const correctPassword = await bcrypt.compare(password, user.passwordHash);
     console.log(correctPassword);

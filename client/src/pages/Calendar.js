@@ -169,6 +169,7 @@ export default function DateCalendarServerRequest({ startDate }) {
 
     return currentStreak;
   }, [selectedDates]);
+  
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
